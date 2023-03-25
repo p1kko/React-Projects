@@ -6,45 +6,54 @@ import Header from "./components/Header";
 import axios from "axios";
 import Favourites from "./pages/Favourites";
 
+
+ export const AppContext = React.createContext({})
+
 function App() {
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
   const [favourites, setIsFavourites] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
   const [cartOpened, setCartOpened] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
-    axios.get("http://localhost:3001/sneakers").then((res) => {
-      setItems(res.data);
-    });
+    async function fetchData() {
+      
+      const cartResponse = await axios.get("http://localhost:3001/cart");
+      const favorResponse = await axios.get("http://localhost:3001/favor");
+      const itemResponse = await axios.get("http://localhost:3001/sneakers");
 
-    axios.get("http://localhost:3001/cart").then((res) => {
-      setCartItems(res.data);
-    });
-    axios.get("http://localhost:3001/favor").then((res) => {
-      setIsFavourites(res.data);
-    });
+      setIsLoading(false)
+      setCartItems(cartResponse.data);
+      setIsFavourites(favorResponse.data);
+      setItems(itemResponse.data);
+    }
+    fetchData();
   }, []);
 
   const onAddToCart = (obj) => {
-    axios.post("http://localhost:3001/cart", obj);
-    setCartItems([...cartItems, obj]);
+    if (cartItems.find((cartObj) => cartObj.name === obj.name)) {
+      axios.delete(`http://localhost:3001/cart/${obj.name}`);
+      setCartItems((prev) => prev.filter((item) => item.name !== obj.name));
+    } else {
+      axios.post("http://localhost:3001/cart", obj);
+      setCartItems([...cartItems, obj]);
+    }
   };
 
   const onAddToFavourite = async (obj) => {
-  try { 
-     if (favourites.find((favObj) => favObj.id === obj.id)) {
-    axios.delete(`http://localhost:3001/favor/${obj.id}`);
-    setIsFavourites((prev) => prev.filter((item) => item.id !== obj.id));
-  }else{
-    const {data} = await axios.post("http://localhost:3001/favor", obj);
-    setIsFavourites([...favourites, data]);
-  }
-    
-  } catch (error) {
-    alert('Не удалось добавить в закладки!')
-  }
-
+    try {
+      if (favourites.find((favObj) => favObj.id === obj.id)) {
+        axios.delete(`http://localhost:3001/favor/${obj.id}`);
+        setIsFavourites((prev) => prev.filter((item) => item.id !== obj.id));
+      } else {
+        const { data } = await axios.post("http://localhost:3001/favor", obj);
+        setIsFavourites([...favourites, data]);
+      }
+    } catch (error) {
+      alert("Не удалось добавить в закладки!");
+    }
   };
 
   const onRemoveCartItem = (id) => {
@@ -56,8 +65,13 @@ function App() {
     setSearchValue(event.target.value);
   };
 
-  return (
-    <div className="wrapper clear">
+
+  const isItemAdded = (name) =>{
+    return cartItems.some((obj) => obj.name === name)
+  }
+
+  return ( <AppContext.Provider value={{cartItems, favourites, items, isItemAdded,  onAddToFavourite, setCartOpened, setCartItems }}>
+<div className="wrapper clear">
       {cartOpened && (
         <Drawer
           items={cartItems}
@@ -72,12 +86,14 @@ function App() {
           path="/"
           element={
             <Home
+              cartItems={cartItems}
               items={items}
               searchValue={searchValue}
               setSearchValue={setSearchValue}
               onChangeInputValue={onChangeInputValue}
               onAddToFavourite={onAddToFavourite}
               onAddToCart={onAddToCart}
+              isLoading={isLoading}
             />
           }
         />
@@ -86,13 +102,14 @@ function App() {
           path="/favourites"
           element={
             <Favourites
-              items={favourites}
-              onAddToFavourite={onAddToFavourite}
+            
+
             />
           }
         />
       </Routes>
     </div>
+</AppContext.Provider>
   );
 }
 
