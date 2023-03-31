@@ -13,14 +13,12 @@ function Card({
   favourited = false,
   loading = false,
 }) {
-
-  const {isItemAdded} = React.useContext(AppContext)
+  const { isItemAdded } = React.useContext(AppContext);
 
   const [isFavourite, setIsFavourite] = React.useState(favourited);
 
   const onClickPlus = () => {
     onPlus({ id, name, price, imageUrl });
-
   };
 
   const onClickFavourite = () => {
@@ -48,13 +46,13 @@ function Card({
         </ContentLoader>
       ) : (
         <>
-          <div className={styles.favourite}>
+          {onFavourite && <div className={styles.favourite}>
             <img
               src={isFavourite ? "/img/heart-full.svg" : "/img/heart-empty.svg"}
               alt="Unliked"
               onClick={onClickFavourite}
             />
-          </div>
+          </div>}
           <img width={133} height={112} src={imageUrl} alt="Sneakers" />
           <h5>{name}</h5>
           <div className="d-flex justify-between align-center">
@@ -63,12 +61,14 @@ function Card({
               <b>{price}грн</b>
             </div>
 
-            <img
-              onClick={onClickPlus}
-              src={isItemAdded(name) ? "/img/check.svg" : "/img/plus.svg"}
-              alt="add-item"
-              className={styles.plus}
-            />
+            {onPlus && (
+              <img
+                onClick={onClickPlus}
+                src={isItemAdded(name) ? "/img/check.svg" : "/img/plus.svg"}
+                alt="add-item"
+                className={styles.plus}
+              />
+            )}
           </div>{" "}
         </>
       )}

@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../components/Card";
+import Slider from "../components/Slider/Slider";
 
 
 
@@ -12,6 +13,13 @@ function Home({
   onAddToCart,
   isLoading
 }) {
+
+  const images = [
+    "./img/Slider/slide-1.jpg",
+    "./img/Slider/slide-2.jpg",
+    "./img/Slider/slide-3.jpg",
+    "./img/Slider/slide-4.jpg"
+  ];
 
   const renderItems = () => {
     const filteredItems = items.filter((item) =>
@@ -35,6 +43,7 @@ function Home({
 
   return (
     <div className="content p-40">
+      <Slider images={images} />
       <div className="d-flex align-center mb-40 justify-between">
         <h1>
           {searchValue ? `Поиск по запросу: ${searchValue}` : "Все кроссовки"}
@@ -50,8 +59,11 @@ function Home({
       </div>
 
       <div className="d-flex flex-wrap">{renderItems()}</div>
+
     </div>
+    
   );
+ 
 }
 
 export default Home;

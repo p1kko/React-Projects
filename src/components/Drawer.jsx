@@ -7,13 +7,13 @@ function Drawer({ onRemove, onCloseCart, items = [] }) {
   const { cartItems, setCartItems } = React.useContext(AppContext);
   const [isOrderComplete, setIsOrderComplete] = React.useState(false);
   const [orderId, setOrderId] = React.useState(null);
+  const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
 
   const onClickOrder = async () => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:3001/orders",
-        {items: cartItems}
-      );
+      const { data } = await axios.post("http://localhost:3001/orders", {
+        items: cartItems,
+      });
       setOrderId(data.id);
       setIsOrderComplete(true);
       setCartItems([]);
@@ -65,12 +65,12 @@ function Drawer({ onRemove, onCloseCart, items = [] }) {
                 <li className="d-flex">
                   <span>Итого:</span>
                   <div></div>
-                  <b>10432грн</b>
+                  <b>{totalPrice}грн</b>
                 </li>
                 <li className="d-flex">
                   <span>Налог 5%:</span>
                   <div></div>
-                  <b>521.6 грн</b>
+                  <b>{Math.round(totalPrice * 0.05)} грн</b>
                 </li>
               </ul>
               <button onClick={onClickOrder}>Оформить заказ</button>
