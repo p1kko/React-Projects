@@ -24,9 +24,9 @@ function App() {
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const cartResponse = await axios.get('https://react-app-gapchenko.netlify.app//api/cart');
-        const favorResponse = await axios.get("https://react-app-gapchenko.netlify.app//api/favor");
-        const itemResponse = await axios.get("https://react-app-gapchenko.netlify.app//api/sneakers");
+        const cartResponse = await axios.get('https://react-app-gapchenko.netlify.app/api/cart');
+        const favorResponse = await axios.get("https://react-app-gapchenko.netlify.app/api/favor");
+        const itemResponse = await axios.get("https://react-app-gapchenko.netlify.app/api/sneakers");
 
         setIsLoading(false);
         setCartItems(cartResponse.data);
