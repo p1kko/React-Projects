@@ -53,56 +53,5 @@
   ],
   "cart": [],
   "favor": [],
-  "orders": [
-    {
-      "items": [
-        {
-          "name": "Мужские Кроссовки Nike Kyrie 4",
-          "price": 3300,
-          "imageUrl": "/img/Sneakers/3.jpg"
-        },
-        {
-          "name": "Кроссовки Puma X Aka Boku Future Rider",
-          "price": 4359,
-          "imageUrl": "/img/Sneakers/4.jpg"
-        }
-      ],
-      "id": 1
-    },
-    {
-      "items": [
-        {
-          "name": "Мужские Кроссовки Jordan Air Jordan 11",
-          "price": 2400,
-          "imageUrl": "/img/Sneakers/7.jpg"
-        },
-        {
-          "name": "Мужские Кроссовки Nike LeBron XVIII",
-          "price": 8499,
-          "imageUrl": "/img/Sneakers/8.jpg"
-        }
-      ],
-      "id": 2
-    },
-    {
-      "items": [
-        {
-          "name": "Мужские Кроссовки Nike Kyrie 4",
-          "price": 3300,
-          "imageUrl": "/img/Sneakers/3.jpg"
-        },
-        {
-          "name": "Кроссовки Puma X Aka Boku Future Rider",
-          "price": 4359,
-          "imageUrl": "/img/Sneakers/4.jpg"
-        },
-        {
-          "name": "Мужские Кроссовки Nike LeBron XVIII",
-          "price": 8499,
-          "imageUrl": "/img/Sneakers/8.jpg"
-        }
-      ],
-      "id": 3
-    }
-  ]
+  "orders": []
 }
