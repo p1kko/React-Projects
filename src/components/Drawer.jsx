@@ -11,7 +11,7 @@ function Drawer({ onRemove, onCloseCart, items = [] }) {
 
   const onClickOrder = async () => {
     try {
-      const { data } = await axios.post("http://localhost:3001/orders", {
+      const { data } = await axios.post("https://sneakers-project.herokuapp.com/api/orders", {
         items: cartItems,
       });
       setOrderId(data.id);
