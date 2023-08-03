@@ -24,9 +24,9 @@ function App() {
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const cartResponse = await axios.get("https://sneakers-project.herokuapp.com/api/cart");
-        const favorResponse = await axios.get("https://sneakers-project.herokuapp.com/api/favor");
-        const itemResponse = await axios.get("https://sneakers-project.herokuapp.com/api/sneakers");
+        const cartResponse = await axios.get("https://sneakers-shop-5ehl.onrender.com/api/cart");
+        const favorResponse = await axios.get("https://sneakers-shop-5ehl.onrender.com/api/favor");
+        const itemResponse = await axios.get("https://sneakers-shop-5ehl.onrender.com/api/sneakers");
 
         setIsLoading(false);
         setCartItems(cartResponse.data);
@@ -41,10 +41,10 @@ function App() {
 
   const onAddToCart = (obj) => {
     if (cartItems.find((cartObj) => cartObj.name === obj.name)) {
-      axios.delete(`https://sneakers-project.herokuapp.com/api/cart/${obj.name}`);
+      axios.delete(`https://sneakers-shop-5ehl.onrender.com/api/cart/${obj.name}`);
       setCartItems((prev) => prev.filter((item) => item.name !== obj.name));
     } else {
-      axios.post("https://sneakers-project.herokuapp.com/api/cart", obj);
+      axios.post("https://sneakers-shop-5ehl.onrender.com/api/cart", obj);
       setCartItems([...cartItems, obj]);
     }
   };
@@ -52,10 +52,10 @@ function App() {
   const onAddToFavourite = async (obj) => {
     try {
       if (favourites.find((favObj) => favObj.id === obj.id)) {
-        axios.delete(`https://sneakers-project.herokuapp.com/api/favor/${obj.id}`);
+        axios.delete(`https://sneakers-shop-5ehl.onrender.com/api/favor/${obj.id}`);
         setIsFavourites((prev) => prev.filter((item) => item.id !== obj.id));
       } else {
-        const { data } = await axios.post("https://sneakers-project.herokuapp.com/api/favor", obj);
+        const { data } = await axios.post("https://sneakers-shop-5ehl.onrender.com/api/favor", obj);
         setIsFavourites([...favourites, data]);
       }
     } catch (error) {
@@ -64,7 +64,7 @@ function App() {
   };
 
   const onRemoveCartItem = (id) => {
-    axios.delete(`https://sneakers-project.herokuapp.com/api/cart/${id}`);
+    axios.delete(`https://sneakers-shop-5ehl.onrender.com/api/cart/${id}`);
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
