@@ -21,7 +21,7 @@ const totalPrice = cartItems.reduce((sum,obj) => obj.price + sum, 0)
           
           <div className="headerInfo">
             <h3 className="text-uppercase">React Sneakers</h3>
-            <p className="opacity-5">Магазин лучших кроссовок</p>
+            <p className="opacity-5">Магазин кросівок</p>
           </div>
         </div>
        </Link>

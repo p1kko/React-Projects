@@ -10,7 +10,7 @@ function Orders() {
   React.useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get("https://sneakers-project.herokuapp.com/api/orders");
+        const { data } = await axios.get("https://json-mock-sneakers.onrender.com/orders");
       setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
       setIsLoading(false);
       } catch (error) {

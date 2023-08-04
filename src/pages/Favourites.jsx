@@ -9,7 +9,7 @@ function Favourites() {
   return (
     <div className="content p-40">
       <div className="d-flex align-center mb-40 justify-between">
-        <h1>Мои Закладки</h1>
+        <h1>Мої закладки</h1>
         {/* <div className="search-block d-flex">
           <img src="/img/search.svg" alt="Search" />
           <input

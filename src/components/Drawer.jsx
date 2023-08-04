@@ -11,14 +11,14 @@ function Drawer({ onRemove, onCloseCart, items = [] }) {
 
   const onClickOrder = async () => {
     try {
-      const { data } = await axios.post("https://sneakers-project.herokuapp.com/api/orders", {
+      const { data } = await axios.post("https://json-mock-sneakers.onrender.com/orders", {
         items: cartItems,
       });
       setOrderId(data.id);
       setIsOrderComplete(true);
       setCartItems([]);
     } catch (error) {
-      alert("не удалось создать заказ");
+      alert("не вдалося сформувати замовлення");
     }
   };
   return (
@@ -78,11 +78,11 @@ function Drawer({ onRemove, onCloseCart, items = [] }) {
           </div>
         ) : (
           <Info
-            title={isOrderComplete ? "Заказ оформлен" : "Корзина пустая"}
+            title={isOrderComplete ? "Замовлення сформоване" : "Корзина порожня"}
             description={
               isOrderComplete
-                ? `Ваш заказ # ${orderId} вскоре будет передан нашему курьеру`
-                : "Добавьте хотя бы одну пару в заказы"
+                ? `Ваше замовлення # ${orderId} у найближчий час буде відправлено`
+                : "Додайте хоча б одну пару в замовлення"
             }
             image={isOrderComplete ? "/img/order.svg" : "/img/empty-cart.svg"}
           />

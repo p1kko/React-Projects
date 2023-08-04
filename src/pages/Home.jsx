@@ -46,14 +46,14 @@ function Home({
       <Slider images={images} />
       <div className="d-flex align-center mb-40 justify-between">
         <h1>
-          {searchValue ? `Поиск по запросу: ${searchValue}` : "Все кроссовки"}
+          {searchValue ? `Пошук по запиту: ${searchValue}` : "Всі кросівки"}
         </h1>
         <div className="search-block d-flex">
           <img src="/img/search.svg" alt="Search" />
           <input
             onChange={onChangeInputValue}
             type="text"
-            placeholder="Поиск..."
+            placeholder="Пошук..."
           />
         </div>
       </div>

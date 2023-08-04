@@ -57,7 +57,7 @@ function Card({
           <h5>{name}</h5>
           <div className="d-flex justify-between align-center">
             <div className="d-flex flex-column ">
-              <span>Цена</span>
+              <span>Ціна</span>
               <b>{price}грн</b>
             </div>
 
